@@ -2,17 +2,23 @@ plugins {
     id 'java'
 }
 
-group = 'ch.ti8m.azubi'
-version = '1.0-SNAPSHOT'
+group 'com.example'
+version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.9.1')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-    implementation('mysql:mysql-connector-java:8.0.19')
+    // JUnit 5 (Jupiter) dependencies
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.3'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.3'
+
+    // Mockito dependency
+    testImplementation 'org.mockito:mockito-core:5.4.0'
+
+    // Mockito extension for JUnit 5
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.4.0'
 }
 
 test {
