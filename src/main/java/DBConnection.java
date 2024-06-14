@@ -32,6 +32,8 @@ public class DBConnection {
             System.err.println("ERROR OCCURRED - ERROR MESSAGE: " + sqlException.getMessage() + "\nSQLSTATE: " + sqlException.getSQLState());
         }
     }
+
+
     static void listDatabases(Connection connection) {
         try {
             DatabaseMetaData metaData = connection.getMetaData();
@@ -46,5 +48,8 @@ public class DBConnection {
         } catch (SQLException sqlException) {
             System.err.println("ERROR OCCURRED - ERROR MESSAGE: " + sqlException.getMessage() + "\nSQLSTATE: " + sqlException.getSQLState());
         }
+    }
+    public static void main (String []args){
+        establishConnection();
     }
 }
