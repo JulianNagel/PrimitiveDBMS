@@ -20,8 +20,4 @@ import java.sql.DriverManager;
 public class DBConnectionTest {
     private static final Connection mockConnection = Mockito.mock(Connection.class);
 
-    @Test
-    private void DBConnectionTest(){
-        Mockito.when();
-    }
 }
