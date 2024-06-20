@@ -1,10 +1,13 @@
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Scanner;
 
 public class CreateTable {
     String tableQuery;
     Scanner scanner = new Scanner(System.in);
+    boolean hasPK = false;
 
-    public void defineTableQuerry() {
+    public String defineTableQuerry() {
         System.out.println("Enter name of the entity");
         String tableName = scanner.next();
 
@@ -15,7 +18,7 @@ public class CreateTable {
 
 
         while (true) {
-            System.out.println("Add column? (y/n)");
+            System.out.println("Add column?(y/n)");
             String input = scanner.next();
             if (input.equalsIgnoreCase("y")) {
                 queryBuilder.append(defineColumn());
@@ -29,13 +32,26 @@ public class CreateTable {
         queryBuilder.append(");");
 
         this.tableQuery = queryBuilder.toString();
+        return tableQuery;
     }
 
-    public String defineColumn() {
+
+    private @NotNull String defineColumn() {
+        String input;
         StringBuilder collumnBuilder = new StringBuilder();
+
 
         System.out.println("Enter column name.");
         collumnBuilder.append(scanner.next());
+
+        if (!hasPK) {
+            System.out.println("add PK?(y/n)");
+            if (scanner.next().equals("y")) {
+                collumnBuilder.append(" INT UNSIGNED(11) AUTO_INCREMENT PRIMARY KEY");
+                return collumnBuilder.toString();
+            }
+            hasPK = true;
+        }
 
         System.out.println("Enter datatype.");
         collumnBuilder.append(" ").append(scanner.next());
@@ -43,16 +59,33 @@ public class CreateTable {
         System.out.println("Enter Length.");
         collumnBuilder.append("(").append(scanner.nextInt()).append(")");
 
-        System.out.println("Primary Key?(y/n)");
-        if(scanner.next().equals("y")){
-            collumnBuilder.append(" PRIMARY KEY AUTO_INCREMENT");
+        while (true) {
+            System.out.println("UN?(y/n)");
+            input = scanner.next();
+            if (input.equals("y")) {
+                collumnBuilder.append(" UNIQUE");
+                break;
+            } else if (input.equals("n")) {
+                break;
+            } else {
+                System.out.println("Invalid input");
+            }
         }
 
+        while (true) {
+            System.out.println("NN?(y/n)");
+            input = scanner.next();
+            if (input.equals("y")) {
+                collumnBuilder.append(" NOT NULL");
+                break;
+            } else if (input.equals("n")) {
+                break;
+            } else {
+                System.out.println("Invalid input");
+            }
+        }
 
-
-
-        System.out.println();
-
+        collumnBuilder.append("\n");
         return collumnBuilder.toString();
     }
 }

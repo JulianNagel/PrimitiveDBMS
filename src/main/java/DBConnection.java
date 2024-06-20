@@ -4,15 +4,9 @@ import java.sql.SQLException;
 
 
 public class DBConnection {
-    String url;
-    String user;
-    String password;
-
-    public void getGetconnectionRequirements(String url, String user, String password) {
-        this.url = url;
-        this.user = user;
-        this.password = password;
-    }
+    String url = "jdbc:mysql://localhost:3306/test";
+    String user = "root";
+    String password = null;
 
     public final Connection getconnection() throws SQLException {
         Connection connection = DriverManager.getConnection(url, user, password);
